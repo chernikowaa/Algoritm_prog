@@ -1,0 +1,130 @@
+namespace _13_04_
+{
+    class DelegateProgram
+    {
+        public delegate int Operation(int digit1, int digit2);
+        public class Operations
+        {
+            public int Case1(int digit1, int digit2)
+            {
+                int answer = digit1 + digit2;
+                return answer;
+            }
+
+            public int Case2(int digit1, int digit2)
+            {
+                int answer = digit1 * digit2;
+                return answer;
+            }
+
+            public int Case3(int digit1, int digit2)
+            {
+                try
+                {
+                    int answer = digit1 / digit2;
+                    return answer;
+                }
+                catch (DivideByZeroException)
+                {
+                    Console.WriteLine("Ошибка");
+                    Console.ReadLine();
+                    System.Environment.Exit(1);
+                    return 0;
+                }
+            }
+
+            public int Case4(int digit1, int digit2)
+            {
+                int answer = digit1 - digit2;
+                return answer;
+            }
+        }
+        interface IMath
+        {
+            int Sum(int digit1, int digit2);
+            int Mult(int digit1, int digit2);
+            int Div(int digit1, int digit2);
+            int Sub(int digit1, int digit2);
+        }
+        public class Program : IMath
+        {
+            Operations ops = new Operations();
+
+            int IMath.Sum(int digit1, int digit2)
+            {
+                Operation Sum = new Operation(ops.Case1);
+                return Sum(digit1, digit2);
+            }
+            int IMath.Mult(int digit1, int digit2)
+            {
+                Operation Mult = new Operation(ops.Case2);
+                return Mult(digit1, digit2);
+            }
+            int IMath.Div(int digit1, int digit2)
+            {
+                Operation Div = new Operation(ops.Case3);
+                return Div(digit1, digit2);
+            }
+            int IMath.Sub(int digit1, int digit2)
+            {
+                Operation Sub = new Operation(ops.Case4);
+                return Sub(digit1, digit2);
+            }
+            static void Main(string[] args)
+            {
+                Boolean shown = true;
+
+                while (shown)
+                {
+                    shown = Menu();
+                }
+            }
+            public static Boolean Menu()
+            {
+                Console.Clear();
+                Console.WriteLine("Меню");
+                Console.WriteLine();
+                Console.WriteLine("Введите первое число:");
+                int digit1 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Введите второе число:");
+                int digit2 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Выберите операцию");
+                Console.WriteLine("1. Сложение");
+                Console.WriteLine("2. Умножение");
+                Console.WriteLine("3. Деление");
+                Console.WriteLine("4. Вычитание");
+                Console.WriteLine("5. Выход");
+                Console.Write("Выберите пункт меню: ");
+                int choice = Convert.ToInt32(Console.ReadLine());
+                IMath math = new Program();
+
+                switch (choice)
+                {
+                    case 1:
+                        Console.WriteLine(math.Sum(digit1, digit2));
+                        Console.ReadLine();
+                        return true;
+                    case 2:
+                        Console.WriteLine(math.Mult(digit1, digit2));
+                        Console.ReadLine();
+                        return true;
+                    case 3:
+                        Console.WriteLine(math.Div(digit1, digit2));
+                        Console.ReadLine();
+                        return true;
+                    case 4:
+                        Console.WriteLine(math.Sub(digit1, digit2));
+                        Console.ReadLine();
+                        return true;
+                    case 5:
+                        return false;
+                    default:
+                        Console.WriteLine("Такого не существует, выберите другой пункт");
+                        Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                        Console.ReadLine();
+                        return true;
+                }
+            }
+        }
+    }
+}
