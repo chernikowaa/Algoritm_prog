@@ -1,0 +1,55 @@
+namespace _13_04_._2_
+{
+    internal class Program
+    {
+        delegate int IntOP(int digit1, int digit2, int digit3);
+        class Lamda
+        {
+            static void Main(string[] args)
+            {
+                Console.WriteLine("Введите 1 число:");
+                int digit1 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Введите 2 число:");
+                int digit2 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Введите 3 число:");
+                int digit3 = Convert.ToInt32(Console.ReadLine());
+                IntOP Summa = (a, b, c) =>
+                {
+                    int Sum = a + b + c;
+                    return Sum;
+                };
+                var ans1 = Summa(digit1, digit2, digit3);
+                IntOP Multip = (a, b, c) =>
+                {
+                    int Mult = a * b * c;
+                    return Mult;
+                };
+                var ans2 = Multip(digit1, digit2, digit3);
+                IntOP Average = (a, b, c) =>
+                {
+                    int Aver = (a + b + c)/3;
+                    return Aver;
+                };
+                var ans3 = Average(digit1, digit2, digit3);
+                IntOP Maxxx = (a, b, c) =>
+                {
+                    int[] M = { a, b, c };
+                    return M.Max();
+                };
+                var ans4 = Maxxx(digit1, digit2, digit3);
+                IntOP Minnn = (a, b, c) =>
+                {
+                    int[] Min = { a, b, c };
+                    return Min.Min();
+                };
+                var ans5 = Minnn(digit1, digit2, digit3);
+                Console.WriteLine($"Сумма равна: {ans1}");
+                Console.WriteLine($"Произведение равно: {ans2}");
+                Console.WriteLine($"Среднее арифметическое: {ans3}");
+                Console.WriteLine($"Максимальное значение: {ans4}");
+                Console.WriteLine($"Минимальное значение: {ans5}");
+                Console.ReadLine();
+            }
+        }
+    }
+}
