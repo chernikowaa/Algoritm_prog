@@ -1,0 +1,440 @@
+namespace DB_Main_Aux
+{
+    internal class Program
+    {
+            static void Main(string[] args)
+            {
+                Data_Base Data_Base = Fill_Base();
+                Boolean shown = true;
+
+                while (shown)
+                {
+                    shown = Menu(Data_Base);
+                }
+            }
+            static Boolean Menu(Data_Base Data_Base)
+            {
+                Console.Clear();
+                Console.WriteLine("База Данных");
+                Console.WriteLine();
+                Console.WriteLine("Выберете способ сортировки:");
+                Console.WriteLine("1. По общему стажу работы");
+                Console.WriteLine("2. По стажу работы на последнем месте организации");
+                Console.WriteLine("3. Количество экземпляров отпечатанных за диапазон ");
+                Console.WriteLine("4. Работа вспомогательных");
+                Console.WriteLine("5. Выборка приказов, которое составляло определенное лицо");
+                Console.WriteLine("6. Выход");
+                Console.Write("Выберите пункт меню: ");
+                int choice = Convert.ToInt32(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        Case1(Data_Base);
+                        return true;
+                    case 2:
+                        Case2(Data_Base);
+                        return true;
+                    case 3:
+                        Case3(Data_Base);
+                        return true;
+                    case 4:
+                        Case4(Data_Base);
+                        return true;
+                    case 5:
+                        Case5(Data_Base);
+                        return true;
+                    case 6:
+                        return false;
+                    default:
+                        Console.WriteLine("Такого не существует, выберите другой пункт");
+                        Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                        Console.ReadLine();
+                        return true;
+                }
+            }
+            static void Case1(Data_Base Data_Base)
+            {
+                int search_field = Convert.ToInt32(Console.ReadLine());
+                foreach (Manager Manager in Data_Base.managers)
+                {
+                    int totalExperience = 0;
+                    foreach (Employment_record Employment_record in Manager.Employment_records)
+                    {
+                        totalExperience += Employment_record.Experience;
+                    }
+                    if (totalExperience == search_field)
+                    {
+                        Manager.print();
+                    }
+                }
+                foreach (MainEmployee Main in Data_Base.mains)
+                {
+                    int totalExperience = 0;
+                    foreach (Employment_record Employment_record in Main.Employment_records)
+                    {
+                        totalExperience += Employment_record.Experience;
+                    }
+                    if (totalExperience == search_field)
+                    {
+                        Main.print();
+                    }
+                }
+                foreach (Auxiliary Auxiliary in Data_Base.auxiliaries)
+                {
+                    int totalExperience = 0;
+                    foreach (Employment_record Employment_record in Auxiliary.Employment_records)
+                    {
+                        totalExperience += Employment_record.Experience;
+                    }
+                    if (totalExperience == search_field)
+                    {
+                        Auxiliary.print();
+                    }
+                }
+                Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                Console.ReadLine();
+            }
+
+            static void Case2(Data_Base Data_Base)
+            {
+                int search_field = Convert.ToInt32(Console.ReadLine());
+                foreach (Manager Manager in Data_Base.managers)
+                {
+                    if (Manager.Employment_records != null)
+                    {
+                        int lastIndex = Manager.Employment_records.Length - 1;
+                        if (Manager.Employment_records[lastIndex].Experience == search_field)
+                        {
+                            Manager.print();
+                        }
+                    }
+                }
+                foreach (MainEmployee Main in Data_Base.mains)
+                {
+                    if (Main.Employment_records != null)
+                    {
+                        int lastIndex = Main.Employment_records.Length - 1;
+                        if (Main.Employment_records[lastIndex].Experience == search_field)
+                        {
+                            Main.print();
+                        }
+                    }
+                }
+                foreach (Auxiliary Auxiliary in Data_Base.auxiliaries)
+                {
+                    if (Auxiliary.Employment_records != null)
+                    {
+                        int lastIndex = Auxiliary.Employment_records.Length - 1;
+                        if (Auxiliary.Employment_records[lastIndex].Experience == search_field)
+                        {
+                            Auxiliary.print();
+                        }
+                    }
+                }
+                Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                Console.ReadLine();
+            }
+
+            static void Case3(Data_Base Data_Base)
+            {
+                Console.Write("Введите начальную дату: ");
+                DateTime startDate = Convert.ToDateTime(Console.ReadLine());
+                Console.Write("Введите конечную дату: ");
+                DateTime endDate = Convert.ToDateTime(Console.ReadLine());
+                Console.Write("Введите количество напечатанных экземпляров: ");
+                int search_field = Convert.ToInt32(Console.ReadLine());
+                foreach (MainEmployee Main in Data_Base.mains)
+                {
+                    int Total_Copies = 0;
+                    DateTime currentDate = startDate;
+                    while (currentDate <= endDate)
+                    {
+                        Total_Copies += Main.Copies[currentDate];
+                        currentDate.AddDays(1);
+                    }
+
+                    if (Total_Copies == search_field)
+                    {
+                        Main.print();
+                    }
+                }
+                Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                Console.ReadLine();
+            }
+
+            static void Case4(Data_Base Data_Base)
+            {
+                Console.Write("Введите название работы: ");
+                string search_field = Console.ReadLine();
+                foreach (Auxiliary Auxiliary in Data_Base.auxiliaries)
+                {
+                    if (Auxiliary.Jobs.ContainsValue(search_field))
+                    {
+                        Auxiliary.print();
+                    }
+                }
+                Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                Console.ReadLine();
+            }
+
+            static void Case5(Data_Base Data_Base)
+            {
+                Console.Write("Введите ФИО сотрудника: ");
+                string search_field = Console.ReadLine();
+                foreach (Manager Manager in Data_Base.managers)
+                {
+                    if (Manager.Full_Name == search_field)
+                    {
+                        if (Manager.Orders != null)
+                        {
+                            foreach (var pair in Manager.Orders)
+                            {
+                                Console.WriteLine($"{pair.Key}\t{pair.Value}\t");
+                            }
+                        }
+                    }
+                }
+                Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                Console.ReadLine();
+            }
+
+        class Data_Base
+        {
+            public Manager[] managers;
+            public MainEmployee[] mains;
+            public Auxiliary[] auxiliaries;
+        }
+        class Employment_record
+        {
+            public string Organization;
+            public DateTime Start_date;
+            public DateTime Date_of_dismissal;
+            public int Experience;
+            public void print()
+            {
+                Console.WriteLine($"{Organization}\t{Start_date}\t{Date_of_dismissal}\t{Experience}\t");
+            }
+        }
+        class Manager
+        {
+            public string Full_Name;
+            public string Post;
+            public Dictionary<DateTime, int> Orders;
+            public Employment_record[] Employment_records;
+
+            public void print()
+            {
+                Console.WriteLine($"{Full_Name}\t{Post}\t");
+                if (Employment_records != null)
+                {
+                    foreach (Employment_record employment_Record in Employment_records)
+                    {
+                        employment_Record.print();
+                    }
+                }
+                if (Orders != null)
+                {
+                    foreach (var pair in Orders)
+                    {
+                        Console.WriteLine($"{pair.Key}\t{pair.Value}\t");
+                    }
+                }
+            }
+
+        }
+
+        class MainEmployee
+        {
+            public string Full_Name;
+            public string Post;
+            public Dictionary<DateTime, int> Copies;
+            public Employment_record[] Employment_records;
+
+            public void print()
+            {
+                Console.WriteLine($"{Full_Name}\t{Post}\t");
+                if (Employment_records != null)
+                {
+                    foreach (Employment_record employment_Record in Employment_records)
+                    {
+                        employment_Record.print();
+                    }
+                }
+                if (Copies != null)
+                {
+                    foreach (var pair in Copies)
+                    {
+                        Console.WriteLine($"{pair.Key}\t{pair.Value}\t");
+                    }
+                }
+            }
+
+        }
+
+        class Auxiliary
+        {
+            public string Full_Name;
+            public string Post;
+            public Dictionary<DateTime, string> Jobs;
+            public Employment_record[] Employment_records;
+
+            public void print()
+            {
+                Console.WriteLine($"{Full_Name}\t{Post}\t");
+                if (Employment_records != null)
+                {
+                    foreach (Employment_record employment_Record in Employment_records)
+                    {
+                        employment_Record.print();
+                    }
+                }
+                if (Jobs != null)
+                {
+                    foreach (var pair in Jobs)
+                    {
+                        Console.WriteLine($"{pair.Key}\t{pair.Value}\t");
+                    }
+                }
+            }
+
+        }
+        static Data_Base Fill_Base()
+        {
+            Data_Base Data_Base = new Data_Base();
+            Data_Base.managers = Fill_Manager();
+            Data_Base.mains = Fill_Mains();
+            Data_Base.auxiliaries = Fill_Auxiliaries();
+            return Data_Base;
+        }
+        static Manager[] Fill_Manager()
+        {
+            Console.Write("Введите количество управленцев: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Manager[] managers = new Manager[n];
+            for (int i = 0; i < n; i++)
+            {
+                Manager Manager = new Manager();
+                Console.Write("Введите Ваше ФИО: ");
+                Manager.Full_Name = Console.ReadLine();
+                Console.Write("Введите Вашу должность: ");
+                Manager.Post = Console.ReadLine();
+
+                Dictionary<DateTime, int> Orders = new Dictionary<DateTime, int>();
+                Console.Write("Введите количество изданных приказов: ");
+                int countOfOrders = Convert.ToInt32(Console.ReadLine());
+                for (int i2 = 0; i2 < countOfOrders; i2++)
+                {
+                    Console.Write("Введите дату издания приказа/распоряжения: ");
+                    DateTime key = Convert.ToDateTime(Console.ReadLine());
+                    Console.Write("Введите номер приказа/распоряжения: ");
+                    int value = Convert.ToInt32(Console.ReadLine());
+                    Orders.Add(key, value);
+                }
+                Manager.Orders = Orders;
+
+                Console.Write("Есть ли у Вас трудовая книжка? (true/false): ");
+                bool exist_record = Convert.ToBoolean(Console.ReadLine());
+                if (exist_record == true)
+                {
+                    Manager.Employment_records = Fill_Employment_Records();
+                }
+                managers[i] = Manager;
+            }
+            return managers;
+        }
+
+        static MainEmployee[] Fill_Mains()
+        {
+            Console.Write("Введите количество основных сотрудников: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            MainEmployee[] mains = new MainEmployee[n];
+            for (int i = 0; i < n; i++)
+            {
+                MainEmployee Main = new MainEmployee();
+                Console.Write("Введите Ваше ФИО: ");
+                Main.Full_Name = Console.ReadLine();
+                Console.Write("Введите Вашу должность: ");
+                Main.Post = Console.ReadLine();
+
+                Dictionary<DateTime, int> Copies = new Dictionary<DateTime, int>();
+                Console.Write("Введите количество дней, в которые были напечатаны экземпляры: ");
+                int countOfCopies = Convert.ToInt32(Console.ReadLine());
+                for (int i2 = 0; i2 < countOfCopies; i2++)
+                {
+                    Console.Write("Введите дату: ");
+                    DateTime key = Convert.ToDateTime(Console.ReadLine());
+                    Console.Write("Введите количество напечатанных экземпляров: ");
+                    int value = Convert.ToInt32(Console.ReadLine());
+                    Copies.Add(key, value);
+                }
+                Main.Copies = Copies;
+
+                Console.Write("Есть ли у Вас трудовая книжка? (true/false): ");
+                bool exist_record = Convert.ToBoolean(Console.ReadLine());
+                if (exist_record == true)
+                {
+                    Main.Employment_records = Fill_Employment_Records();
+                }
+                mains[i] = Main;
+            }
+            return mains;
+        }
+
+        static Auxiliary[] Fill_Auxiliaries()
+        {
+            Console.Write("Введите количество вспомогательных работников: ");
+            int n = Convert.ToInt32(Console.ReadLine());
+            Auxiliary[] Auxiliaries = new Auxiliary[n];
+            for (int i = 0; i < n; i++)
+            {
+                Auxiliary Auxiliary = new Auxiliary();
+                Console.Write("Введите Ваше ФИО: ");
+                Auxiliary.Full_Name = Console.ReadLine();
+                Console.Write("Введите Вашу должность: ");
+                Auxiliary.Post = Console.ReadLine();
+
+                Dictionary<DateTime, string> Jobs = new Dictionary<DateTime, string>();
+                Console.Write("Введите количество выполненных работ: ");
+                int countOfJobs = Convert.ToInt32(Console.ReadLine());
+                for (int i2 = 0; i2 < countOfJobs; i2++)
+                {
+                    Console.Write("Введите дату: ");
+                    DateTime key = Convert.ToDateTime(Console.ReadLine());
+                    Console.Write("Введите название работы: ");
+                    string value = Console.ReadLine();
+                    Jobs.Add(key, value);
+                }
+                Auxiliary.Jobs = Jobs;
+
+                Console.Write("Есть ли у Вас трудовая книжка? (true/false): ");
+                bool exist_record = Convert.ToBoolean(Console.ReadLine());
+                if (exist_record == true)
+                {
+                    Auxiliary.Employment_records = Fill_Employment_Records();
+                }
+                Auxiliaries[i] = Auxiliary;
+            }
+            return Auxiliaries;
+        }
+        static Employment_record[] Fill_Employment_Records()
+        {
+            Console.Write("Введите количество организаций, в которых Вы работали: ");
+            int m = Convert.ToInt32(Console.ReadLine());
+            Employment_record[] Employment_records = new Employment_record[m];
+            for (int i1 = 0; i1 < m; i1++)
+            {
+                Employment_record Employment_record = new Employment_record();
+                Console.Write("Введите название организации, в которой работали: ");
+                Employment_record.Organization = Console.ReadLine();
+                Console.Write($"Введите дату начала карьеры в {Employment_record.Organization}: ");
+                Employment_record.Start_date = Convert.ToDateTime(Console.ReadLine());
+                Console.Write($"Введите дату увольнения из {Employment_record.Organization} (Пример: 05/02/2004): ");
+                Employment_record.Date_of_dismissal = Convert.ToDateTime(Console.ReadLine());
+                Console.WriteLine($"Общий стаж работы в {Employment_record.Organization}: ");
+                Employment_record.Experience = (int)(Employment_record.Date_of_dismissal - Employment_record.Start_date).TotalDays;
+                Employment_records[i1] = Employment_record;
+            }
+            return Employment_records;
+        }
+    }
+}
