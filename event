@@ -1,0 +1,80 @@
+delegate void MyEventHandler(int a, int b);
+class MyEvent
+{
+    MyEventHandler[] evnt = new MyEventHandler[4];
+    public event MyEventHandler SomeEvent
+    {
+        add
+        {
+            int i;
+            for (i = 0; i < 4; i++)
+                if (evnt[i] == null)
+                {
+                    evnt[i] = value;
+                    break;
+                }
+            if (i == 4) Console.WriteLine("Список событий заполнен.");
+        }
+        remove
+        {
+            int i;
+            for (i = 0; i < 4; i++)
+                if (evnt[i] == value)
+                {
+                    evnt[i] = null;
+                    break;
+                }
+            if (i == 4) Console.WriteLine("Обработчик событий не найден.");
+        }
+    }
+    public void Events(int a, int b)
+    {
+        for (int i = 0; i < 4; i++)
+            if (evnt[i] != null) evnt[i](a,b);
+    }
+}
+class math
+{
+    public void plus(int a, int b)
+    {
+        Console.WriteLine($"Сумма = {a+b}");
+    }
+    public void minus(int a, int b)
+    {
+        Console.WriteLine($"Разность = {a-b}");
+    }
+    public void ymnoz(int a, int b)
+    {
+        Console.WriteLine($"Умножение = {a*b}");
+    }
+    public void div(int a, int b)
+    {
+        if (b == 0) Console.WriteLine("Нет");
+        else {
+            Console.WriteLine($"Деление = {a/b}");
+        }
+    }
+}
+class Event
+{
+    static void Main()
+    {
+        Console.WriteLine("Введите 2 числа");
+        int a = Convert.ToInt32(Console.ReadLine());
+        int b = Convert.ToInt32(Console.ReadLine());
+        MyEvent evt = new MyEvent();
+        math go = new math();
+        math go1 = new math();
+        math go2 = new math();
+        math go3 = new math();
+        
+        evt.SomeEvent += go.plus;
+        evt.SomeEvent += go1.minus;
+        evt.SomeEvent += go2.ymnoz;
+        evt.SomeEvent += go3.div;
+        Console.WriteLine();
+        evt.Events(a,b);
+        Console.WriteLine();
+        Console.ReadLine();
+    }
+}
