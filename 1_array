@@ -1,0 +1,213 @@
+namespace Arrayy
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            String[] data = new string[10];
+            
+            Boolean shown = true;
+
+            while (shown)
+            {
+                shown = Menu(data);
+            }
+        }
+        static Boolean Menu(String[] data)
+        {
+            Console.Clear();
+            Console.WriteLine();
+            Console.WriteLine("Выберите нужный метод:");
+            Console.WriteLine("1. Заполнение элемента массива по индексу");
+            Console.WriteLine("2. Заполнение всех элементов массива одним значением");
+            Console.WriteLine("3. Очищение массива");
+            Console.WriteLine("4. Разворот массивва");
+            Console.WriteLine("5. Сортировка массива");
+            Console.WriteLine("6. Поиск элемента по значению");
+            Console.WriteLine("7. Вывод типа элементов массива");
+            Console.WriteLine("8. Вывод значения по индексу");
+            Console.WriteLine("9. Поиск индекса первого вхождения по значению");
+            Console.WriteLine("10. Поиск индекса последнего вхождения по значению");
+            Console.WriteLine("11. Выход");
+            Console.Write("Выберите пункт меню: ");
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    Case1(data);
+                    return true;
+                case 2:
+                    Case2(data);
+                    return true;
+                case 3:
+                    Case3(data);
+                    return true;
+                case 4:
+                    Case4(data);
+                    return true;
+                case 5:
+                    Case5(data);
+                    return true;
+                case 6:
+                    Case6(data);
+                    return true;
+                case 7:
+                    Case7(data);
+                    return true;
+                case 8:
+                    Case8(data);
+                    return true;
+                case 9:
+                    Case9(data);
+                    return true;
+                case 10:
+                    Case10(data);
+                    return true;
+                case 11:
+                    return false;
+                default:
+                    Console.WriteLine("Такого не существует, выберите другой пункт");
+                    Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                    Console.ReadLine();
+                    return true;
+            }
+        }
+        static void Case1(String[] data)
+        {
+            Console.WriteLine("Введите значение для заполнения");
+            String value = Console.ReadLine();
+            Console.WriteLine("Введите индекс массива");
+            int index = Convert.ToInt32(Console.ReadLine());
+
+            data.SetValue(value, index);
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+
+        static void Case2(String[] data)
+        {
+            Console.WriteLine("Введите значение для заполнения");
+            String value = Console.ReadLine();
+
+            Array.Fill<string>(data, value);
+
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+
+        static void Case3(String[] data)
+        {
+              Array.Clear(data);
+
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+
+        static void Case4(String[] data)
+        {
+            Array.Reverse(data);
+
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+
+        static void Case5(String[] data)
+        {
+            Array.Sort(data);
+
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+
+        static void Case6(String[] data)
+        {
+            Console.WriteLine("Введите значение для поиска");
+            String search_value = Console.ReadLine();
+            Console.WriteLine(Array.Find(data, value => value == search_value));
+
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+
+        static void Case7(String[] data)
+        {
+            Console.WriteLine(data.GetType());
+
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+
+        static void Case8(String[] data)
+        {
+            Console.WriteLine("Введите индекс массива");
+            int index = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine(data.GetValue(index));
+
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+
+        static void Case9(String[] data)
+        {
+            Console.WriteLine("Введите значение для поиска индекса первого вхождения");
+            String value = Console.ReadLine();
+
+            Console.WriteLine(Array.IndexOf<string>(data, value));
+
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+
+        static void Case10(String[] data)
+        {
+            Console.WriteLine("Введите значение для поиска индекса последнего вхождения");
+            String value = Console.ReadLine();
+
+            Console.WriteLine(Array.LastIndexOf<string>(data, value));
+
+            Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+            for (int i = 0; i < data.Length; i++)
+            {
+                Console.WriteLine(data[i]);
+            }
+            Console.ReadLine();
+        }
+    }
+}
