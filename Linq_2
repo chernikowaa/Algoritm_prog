@@ -1,0 +1,36 @@
+namespace Linq_2
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<int> list = new List<int>() { 1, -3, 4, 9, -8, 0, 10, -4};
+            int Min_list = list.Min();
+            var Odd_list = from p in list where p % 2 != 0 select p;
+            Console.WriteLine("1 задание");
+            Console.WriteLine($"Минимальный элемент массива = {Min_list}");
+            Console.WriteLine($"Преобразованный массив без четных элементов:");
+            foreach (int number in Odd_list)
+            {
+                Console.Write($"{number}\t");
+            }
+            Console.WriteLine(); Console.WriteLine($"Минимальный элемент в преобразованный массив:{Odd_list.Min()}");
+            Console.WriteLine();
+            Console.WriteLine("2 задание");
+            var First_half = (from p in list where list.IndexOf(p) < list.Count() / 2 select p).OrderByDescending(n => n);
+            Console.WriteLine($"Преобразование первой половины по убыванию:");
+            foreach (int number in First_half)
+            {
+                Console.Write($"{number}\t");
+            }
+            Console.WriteLine();
+            var Second_half = (from p in list where list.IndexOf(p) >= Math.Round(Convert.ToDouble(list.Count()) / 2) select p).OrderBy(n => n);
+            Console.WriteLine($"Преобразование второй половины по возрастанию:");
+            foreach (int number in Second_half)
+            {
+                Console.Write($"{number}\t");
+            }
+
+        }
+    }
+}
