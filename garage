@@ -1,0 +1,39 @@
+namespace DB
+{
+    class garage
+    {
+        delegate string Moy(car car);
+        public static void Main()
+        {
+            List<car> gar = new List<car>();
+            car lambo = new car("lamborgini", "red", 231);
+            gar.Add(lambo);
+            car fera = new car("ferrari", "blue", 105);
+            gar.Add(fera);
+            car lada = new car("lada", "white", 231);
+            gar.Add(lada);
+            go_moy();
+            void go_moy()
+            {
+                foreach (car car in gar)
+                {
+                    Moy moy;
+                    moy = (x) => ($"{x.Name} помыта");
+                    Console.WriteLine(moy(car));
+                }
+            }
+        }
+        class car
+        {
+            public string Name;
+            public string Colour;
+            public int Num;
+            public car(string name, string colour, int num)
+            {
+                Name = name;
+                Colour = colour;
+                Num = num;
+            }
+        }
+    }
+}
