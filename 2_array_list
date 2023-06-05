@@ -1,0 +1,203 @@
+using System.Collections;
+namespace menu
+{
+    class DB
+    {
+        static void Main(string[] args)
+        {   
+            
+            Boolean shown = true;
+
+            while (shown)
+            {
+                shown = Menu();
+            }
+        }
+        static Boolean Menu()
+        {
+            ArrayList list = new ArrayList(){1,2,"hello", -4,"4","семь"};
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1.1) Добавление числа");
+            Console.WriteLine("2) Длина листа");
+            Console.WriteLine("3) Очистить лист");
+            Console.WriteLine("4) Нахождение индекса");
+            Console.WriteLine("5) Нахождение индекса крайнего элемента");
+            Console.WriteLine("6) Повтор элементов");
+            Console.WriteLine("7) Содержание элемента");
+            Console.WriteLine("8) Ввод элемента");
+            Console.WriteLine("9) Обратный массив");
+            Console.WriteLine("10) Сортировка");
+            Console.Write("\r\nВыберите действие: ");
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1.1":
+                    Add_digit(list);
+                    return true;
+                case "2":
+                    length(list);
+                    return true;
+                case "3":
+                    clearing_array(list);
+                    return true;
+                case "4":
+                    FindIndexOf(list);
+                    return true;
+                case "5":
+                    FindIndexOfLast(list);
+                    return true;
+                case "6":
+                    Repeat_el();
+                    return true;
+                case "7":
+                    Contains_el(list);
+                    return true;
+                case "8":
+                    Insert_el(list);
+                    return true;
+                case "9":
+                    Reverse_l(list);
+                    return true;
+                case "10":
+                    Sort_l(list);
+                    return true;
+                case "11":
+                    return false;
+                default:
+                    Console.WriteLine("Такого не существует, выберите другой пункт");
+                    Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                    Console.ReadLine();
+                    return true;
+                
+            }
+        }
+
+        public static void Add_digit(ArrayList list)
+        {
+            Console.Clear();
+            list.Add(Convert.ToInt32(Console.ReadLine()));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+ 
+        public static void length(ArrayList list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Count);
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void clearing_array(ArrayList list)
+        {
+            Console.Clear();
+            list.Clear();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+            
+        }
+
+        public static void FindIndexOf(ArrayList list)
+        {
+            Console.Clear();
+            int f = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(list.IndexOf(list,  f));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void FindIndexOfLast(ArrayList list)
+        {
+            Console.Clear();
+            int f = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(list.LastIndexOf(list, f));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Repeat_el()
+        {
+            Console.Clear();
+            Console.Write("Введите строку, из которой будет состоять ArrayList");
+            string a = Console.ReadLine();
+            Console.Write("Введите колво элементов ArrayList");
+            int l=Convert.ToInt32(Console.ReadLine());
+            ArrayList al = ArrayList.Repeat( a, l );
+            foreach (var element  in al)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Contains_el(ArrayList list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент");
+            int f = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine(list.Contains(f));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Insert_el(ArrayList list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент ");
+            int el = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Введите индекс");
+            int index = Convert.ToInt32(Console.ReadLine());
+            list.Insert(el, index);
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Reverse_l(ArrayList list)
+        {
+            Console.Clear();
+            list.Reverse();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Sort_l(ArrayList list)
+        {
+            Console.Clear();
+            list.Sort();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+    }
+}
