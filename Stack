@@ -1,0 +1,48 @@
+namespace menu
+{
+    class teacher
+    {
+        public static void Main()
+        {
+            int i = 0;
+            string line = "(a)[v]{ad}ssadafdss";
+            var first = new List<char>{ '{', '[', '(','}', ']', ')' };
+            var second = new List<char>();
+            var list = new Dictionary<char, char>
+            {
+                { '[', ']'},
+                { '{', '}'},
+                { '(', ')'}
+            };
+            Stack<char> people = new Stack<char>();
+            foreach (var el in line)
+            {
+                if (first.Contains(el))
+                {
+                    people.Push(el);
+                    line=line.Substring(line.IndexOf(el)+1);
+                    break;
+                }
+            }
+            foreach (var el in line)
+            {
+                if (first.Contains(el))
+                {
+                    if (list.Keys.Contains(el))
+                    {
+                        people.Push(el);
+                    }
+                    else
+                    {
+                        if (list[people.Peek()] == el)
+                        {
+                            people.Pop();
+                        }
+                    }
+                }
+            }
+            if (people.Count == 0) Console.WriteLine("yes");
+            else Console.WriteLine("no");
+        }
+    }
+}
