@@ -1,0 +1,200 @@
+using System.Collections;
+namespace menu
+{
+    class teacher
+    {
+        static void Main(string[] args)
+        {
+            
+            Boolean shown = true;
+
+            while (shown)
+            {
+                shown = Menu();
+            }
+        }
+        static Boolean Menu()
+        {
+            var employees = new List<string> { "Tom", "Sam", "Bob" };
+            Queue<string> list = new Queue<string>(employees);
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1) Enqueue");
+            Console.WriteLine("2) Count");
+            Console.WriteLine("3) Clear");
+            Console.WriteLine("4) queueCopy");
+            Console.WriteLine("5) ToString");
+            Console.WriteLine("6) Repeat");
+            Console.WriteLine("7) Contains");
+            Console.WriteLine("8) Peek");
+            Console.WriteLine("9) Reverse");
+            Console.WriteLine("10) Dequeue");
+            Console.Write("\r\nВыберите действие: ");
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    Enqueue(list);
+                    return true;
+                case "2":
+                    Count(list);
+                    return true;
+                case "3":
+                    Clear(list);
+                    return true;
+                case "4":
+                    queueCopy(list);
+                    return true;
+                case "5":
+                    ToString(list);
+                    return true;
+                case "6":
+                    Repeat();
+                    return true;
+                case "7":
+                    Contains(list);
+                    return true;
+                case "8":
+                    Peek(list);
+                    return true;
+                case "9":
+                    Reverse(list);
+                    return true;
+                case "10":
+                    Dequeue(list);
+                    return true;
+                case "11":
+                    return false;
+                default:
+                    Console.WriteLine("Такого не существует, выберите другой пункт");
+                    Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                    Console.ReadLine();
+                    return true;
+                
+            }
+        }
+        
+        public static void Enqueue(Queue<string> list)
+        {
+            Console.Clear();
+            list.Enqueue("Пуртов");
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void Count(Queue<string> list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Count);
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void chisto(Queue<string> list)
+        {
+            Console.Clear();
+            list.Clear();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+            
+        }
+
+        public static void queueCopy(Queue<string> list)
+        {
+            Console.Clear();
+            Queue<string> queueCopy = new Queue<string>(list.ToArray());
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void ToString(Queue<string> list)
+        {
+            Console.Clear();
+            string f = Console.ReadLine();
+            Console.WriteLine(list.ToString());
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Repeat()
+        {
+            Console.Clear();
+            Console.Write("Введите строку, из которой будет состоять ArrayList");
+            string a = Console.ReadLine();
+            Console.Write("Введите колво элементов ArrayList");
+            int l=Convert.ToInt32(Console.ReadLine());
+            ArrayList al = ArrayList.Repeat( a, l );
+            foreach (var element  in al)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Contains(Queue<string> list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент");
+            string f = Console.ReadLine();;
+            Console.WriteLine(list.Contains(f));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Peek(Queue<string> list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Peek());
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Reverse(Queue<string> list)
+        {
+            Console.Clear();
+            list.Reverse();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Dequeue(Queue<string> list)
+        {
+            
+            Console.Clear();
+            list.Dequeue();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+    }
+}
