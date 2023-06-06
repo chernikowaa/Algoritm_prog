@@ -1,0 +1,200 @@
+using System.Collections;
+
+namespace menu
+{
+    class teacher
+    {
+        static void Main(string[] args)
+        {
+            
+            Boolean shown = true;
+
+            while (shown)
+            {
+                shown = Menu();
+            }
+        }
+        static Boolean Menu()
+        {
+            HashSet<string> list= new HashSet<string>();
+            list.Add("Third");
+            list.Add("Second");
+            list.Add("First");
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1) Add");
+            Console.WriteLine("2) Count");
+            Console.WriteLine("3) Clear");
+            Console.WriteLine("4) ToString");
+            Console.WriteLine("5) GetEnumerator");
+            Console.WriteLine("6) Repeat");
+            Console.WriteLine("7) Contains");
+            Console.WriteLine("8) GetType");
+            Console.WriteLine("9) print");
+            Console.WriteLine("10) hashcode");
+            Console.Write("\r\nВыберите действие: ");
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    Add(list);
+                    return true;
+                case "2":
+                    Count(list);
+                    return true;
+                case "3":
+                    Clear(list);
+                    return true;
+                case "4":
+                    ToString(list);
+                    return true;
+                case "5":
+                    GetEnumerator(list);
+                    return true;
+                case "6":
+                    Repeat();
+                    return true;
+                case "7":
+                    Containslist);
+                    return true;
+                case "8":
+                    GetType(list);
+                    return true;
+                case "9":
+                    print(list);
+                    return true;
+                case "10":
+                    hashcode(list);
+                    return true;
+                case "11":
+                    return false;
+                default:
+                    Console.WriteLine("Такого не существует, выберите другой пункт");
+                    Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                    Console.ReadLine();
+                    return true;
+                
+            }
+        }
+        
+        public static void Add(HashSet<string> list)
+        {
+            Console.Clear();
+            list.Add(Console.ReadLine());
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void Count(HashSet<string> list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Count);
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void Clear(HashSet<string> list)
+        {
+            Console.Clear();
+            list.Clear();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+            
+        }
+
+        public static void ToString(HashSet<string> list)
+        {
+            Console.Clear();
+            list.ToString();
+            Console.WriteLine(list.ToString());
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void GetEnumerator(HashSet<string> list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.GetEnumerator());
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Repeat()
+        {
+            Console.Clear();
+            Console.Write("Введите строку, из которой будет состоять Hashset");
+            string a = Console.ReadLine();
+            Console.Write("Введите колво элементов Hashet");
+            int l=Convert.ToInt32(Console.ReadLine());
+            ArrayList al = ArrayList.Repeat( a, l );
+            foreach (var element  in al)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Contains(HashSet<string> list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент");
+            string f = Console.ReadLine();;
+            Console.WriteLine(list.Contains(f));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void GetType(HashSet<string> list)
+        {
+            Console.Clear();
+            foreach (var element  in list)
+            {
+                Console.Write(element.GetType());
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void print(HashSet<string> list)
+        {
+            Console.Clear();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void hashcode(HashSet<string> list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.GetHashCode());
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+    }
+}
