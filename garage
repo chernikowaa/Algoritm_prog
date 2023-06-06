@@ -1,25 +1,25 @@
-namespace DB
+namespace menu
 {
-    class garage
+    class teacher
     {
-        delegate string Moy(car car);
+        delegate string wash(car car);
         public static void Main()
         {
-            List<car> gar = new List<car>();
-            car lambo = new car("lamborgini", "red", 231);
-            gar.Add(lambo);
-            car fera = new car("ferrari", "blue", 105);
-            gar.Add(fera);
-            car lada = new car("lada", "white", 231);
-            gar.Add(lada);
-            go_moy();
-            void go_moy()
+            List<car> garage=new List<car>();
+            car car1 = new car("lamborgini", "red", 231);
+            garage.Add(car1);
+            car car2 = new car("ferrari", "blue", 105);
+            garage.Add(car2);
+            car car3 = new car("lada", "white", 231);
+            garage.Add(car3);
+            washing();
+            void washing()
             {
-                foreach (car car in gar)
+                foreach (car car in garage)
                 {
-                    Moy moy;
-                    moy = (x) => ($"{x.Name} помыта");
-                    Console.WriteLine(moy(car));
+                    wash wash;
+                    wash = (x) => ($"{x.Name} помыта");
+                    Console.WriteLine(wasg(car));
                 }
             }
         }
