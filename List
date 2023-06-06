@@ -1,0 +1,207 @@
+using System.Collections;
+
+namespace menu
+{
+    class teacher
+    {
+        static void Main(string[] args)
+        {
+            
+            Boolean shown = true;
+
+            while (shown)
+            {
+                shown = Menu();
+            }
+        }
+        static Boolean Menu()
+        {
+            List<string> list= new List<string>();
+            list.Add("Third");
+            list.Add("Second");
+            list.Add("First");
+            Console.Clear();
+            Console.WriteLine("Меню");
+            Console.WriteLine("1) Add");
+            Console.WriteLine("2) Count");
+            Console.WriteLine("3) Clear");
+            Console.WriteLine("4) IndexOf");
+            Console.WriteLine("5) LastIndexOf");
+            Console.WriteLine("6) Repeat");
+            Console.WriteLine("7) Contains");
+            Console.WriteLine("8) Insert");
+            Console.WriteLine("9) Reverse");
+            Console.WriteLine("10) Sort");
+            Console.Write("\r\nВыберите действие: ");
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    Add(list);
+                    return true;
+                case "2":
+                    Count(list);
+                    return true;
+                case "3":
+                    Clear(list);
+                    return true;
+                case "4":
+                    IndexOf(list);
+                    return true;
+                case "5":
+                    LastIndexOf(list);
+                    return true;
+                case "6":
+                    Repeat();
+                    return true;
+                case "7":
+                    Contains(list);
+                    return true;
+                case "8":
+                    Insert(list);
+                    return true;
+                case "9":
+                    Reverse(list);
+                    return true;
+                case "10":
+                    Sort(list);
+                    return true;
+                case "11":
+                    return false;
+                default:
+                    Console.WriteLine("Такого не существует, выберите другой пункт");
+                    Console.WriteLine("Для возврата в меню нажмите любую клавишу");
+                    Console.ReadLine();
+                    return true;
+                
+            }
+        }
+        
+        public static void Add(List<string> list)
+        {
+            Console.Clear();
+            list.Add(Console.ReadLine());
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void Count(List<string> list)
+        {
+            Console.Clear();
+            Console.WriteLine(list.Count);
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+
+        public static void Clear(List<string> list)
+        {
+            Console.Clear();
+            list.Clear();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+            
+        }
+
+        public static void IndexOf(List<string> list)
+        {
+            Console.Clear();
+            string f = Console.ReadLine();
+            Console.WriteLine(list.IndexOf(f));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void LastIndexOf(List<string> list)
+        {
+            Console.Clear();
+            string f = Console.ReadLine();
+            Console.WriteLine(list.LastIndexOf(f));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Repeat()
+        {
+            Console.Clear();
+            Console.Write("Введите строку, из которой будет состоять ArrayList");
+            string a = Console.ReadLine();
+            Console.Write("Введите колво элементов ArrayList");
+            int l=Convert.ToInt32(Console.ReadLine());
+            ArrayList al = ArrayList.Repeat( a, l );
+            foreach (var element  in al)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Contains(List<string> list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент");
+            string f = Console.ReadLine();;
+            Console.WriteLine(list.Contains(f));
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Insert(List<string> list)
+        {
+            Console.Clear();
+            Console.Write("Введите элемент ");
+            string f = Console.ReadLine();
+            Console.Write("Введите индекс");
+            int index = Convert.ToInt32(Console.ReadLine());
+            list.Insert(index,f);
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Reverse(List<string> list)
+        {
+            Console.Clear();
+            list.Reverse();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+        public static void Sort(List<string> list)
+        {
+            Console.Clear();
+            list.Sort();
+            foreach (var element  in list)
+            {
+                Console.Write($"{element}\t");
+            }
+            Console.Write("\r\nНажмите Enter, чтобы вернуться в главное меню");
+            Console.ReadLine();
+        }
+    }
+}
